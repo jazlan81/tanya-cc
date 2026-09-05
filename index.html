@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tanya CC - V2.6.6 </title>
+<title>Tanya CC - V2.6.6 - V2.6.6</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#1e40af;--blue2:#2563eb;--gold:#f59e0b;--gold2:#fbbf24;--bg:#f8faff}
@@ -46,7 +46,7 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
 <body>
 <div class="header">
   <h1>Tanya <span>CC</span> <small style="font-weight:500;opacity:0.8;font-size:12px">• 103 Topik</small></h1>
-  <div class="version">V2.6.6 </div>
+  <div class="version">V2.6.6</div>
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('chat')">💬 Tanya CC</div>
@@ -58,7 +58,7 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
 <div id="chatTab" class="chat">
   <div class="card gold">
     <b style="color:#92400e">✨ V2.6.6</b><br>
-    <span style="font-size:13px">103 Topik • GCR 180 hari SSPA 2024 • Ex Gratia • Medical Board • Kalkulator LPPSA & GCR • </span>
+    <span style="font-size:13px">103 Topik • GCR 180 hari SSPA 2024 • Ex Gratia • Medical Board • Kalkulator LPPSA & GCR • Theme V2.6.6</span>
   </div>
   <div class="quick">
     <span onclick="ask('GCR 180 hari SSPA')">🔵 GCR 180 hari</span>
@@ -71,7 +71,7 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
     <span onclick="ask('Pencen dan ganjaran')">👴 Pencen</span>
   </div>
   <div id="messages">
-    <div class="msg bot"><b>Selamat datang ke Tanya CC</b>
+    <div class="msg bot"><b>Selamat datang ke Tanya CC V2.6.6!</b>
 
 Saya ada 103 topik penjawat awam:
 • <b>GCR</b> - 180 hari SSPA 2024, formula, burn, waris
@@ -82,6 +82,7 @@ Saya ada 103 topik penjawat awam:
 
 Taip soalan di bawah, contoh: <i>"GCR 180 hari berapa RM?"</i> atau <i>"Medical board 21 tahun"</i>
 
+<b>Taip soalan di bawah</b> - </div>
   </div>
 </div>
 
@@ -141,9 +142,11 @@ const topics = [{"id": "epw", "keys": ["epw", "kwsp", "potongan kwsp"], "title":
 
 function showTab(t){
   document.querySelectorAll('.chat').forEach(function(e){e.style.display='none';});
-  document.getElementById(t+'Tab').style.display='block';
+  var targetTab = document.getElementById(t+'Tab');
+  if(targetTab) targetTab.style.display='block';
   document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active');});
-  event.target.classList.add('active');
+  var tabBtn = document.querySelector('.tab[onclick*="'+t+'"]');
+  if(tabBtn) tabBtn.classList.add('active');
   document.getElementById('inputBar').style.display = t==='chat' ? 'flex' : 'none';
 }
 
