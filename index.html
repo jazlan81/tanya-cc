@@ -30,16 +30,16 @@ body{font-family:system-ui;background:#f8faff;color:#1e293b;padding-bottom:90px}
 </style>
 </head>
 <body>
-<div class="header"><div><b>Tanya CC</b> â€¢ 103 Topik</div><div class="version">V2.6.6</div></div>
+<div class="header"><div><b>Tanya CC</b> • 103 Topik</div><div class="version">V2.6.6</div></div>
 <div class="tabs">
-  <div class="tab active" id="t-chat" onclick="openTab('chat')">ðŸ’¬ Tanya CC</div>
-  <div class="tab" id="t-calc" onclick="openTab('calc')">ðŸ§® Kalkulator</div>
-  <div class="tab" id="t-profil" onclick="openTab('profil')">ðŸ‘¤ Profil</div>
-  <div class="tab" id="t-berita" onclick="openTab('berita')">ðŸ“° Berita</div>
+  <div class="tab active" id="t-chat" onclick="openTab('chat')">💬 Tanya CC</div>
+  <div class="tab" id="t-calc" onclick="openTab('calc')">🧮 Kalkulator</div>
+  <div class="tab" id="t-profil" onclick="openTab('profil')">👤 Profil</div>
+  <div class="tab" id="t-berita" onclick="openTab('berita')">📰 Berita</div>
 </div>
 
 <div id="p-chat" class="page active">
-  <div class="card"><b>âœ¨ Tanya CC V2.6.6 - 103 Topik</b><br><span style="font-size:13px">GCR 180 hari SSPA 2024 â€¢ Ex Gratia â€¢ EPW â€¢ COLA â€¢ LPPSA â€¢ Pencen â€¢ Medical Board</span></div>
+  <div class="card"><b>✨ Tanya CC V2.6.6 - 103 Topik</b><br><span style="font-size:13px">GCR 180 hari SSPA 2024 • Ex Gratia • EPW • COLA • LPPSA • Pencen • Medical Board</span></div>
   <div class="quick">
     <span onclick="askQ('GCR 180 hari')">GCR 180 hari</span>
     <span onclick="askQ('EPW 11%')">EPW</span>
@@ -51,52 +51,29 @@ body{font-family:system-ui;background:#f8faff;color:#1e293b;padding-bottom:90px}
   <div id="msgs"><div class="msg bot"><b>Selamat datang ke Tanya CC V2.6.6</b>
 
 103 Topik Penjawat Awam:
-â€¢ GCR 180 hari SSPA 2024
-â€¢ Ex Gratia Kematian RM15k-100k
-â€¢ EPW 11%, COLA RM200-300
-â€¢ LPPSA 4%, Pencen & Ganjaran
+• GCR 180 hari SSPA 2024
+• Ex Gratia Kematian RM15k-100k
+• EPW 11%, COLA RM200-300
+• LPPSA 4%, Pencen & Ganjaran
 
+Taip soalan di bawah. Contoh: GCR 180 hari, Medical board 21 tahun</div></div>
 </div>
 
 <div id="p-calc" class="page">
-  <div class="kalk-card"><h4>ðŸ”µ GCR 180 Hari SSPA 2024</h4><label>Gaji Akhir RM</label><input id="gajiGCR" type="number" value="3500"><label>Hari GCR max 180</label><input id="hariGCR" type="number" value="180"><button onclick="kiraGCR()">Kira GCR</button><div id="resGCR" class="kalk-result" style="display:none"></div></div>
-  <div class="kalk-card"><h4>ðŸ¦ LPPSA 4%</h4><label>Pinjaman RM</label><input id="loanAmt" type="number" value="300000"><label>Tahun</label><input id="loanYear" type="number" value="30"><button onclick="kiraLPPSA()">Kira LPPSA</button><div id="resLPPSA" class="kalk-result" style="display:none"></div></div>
-  <div class="kalk-card"><h4>ðŸ‘´ Pencen & Ganjaran (Betul)</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Tahun Berkhidmat</label><input id="tahunP" type="number" value="25"></div><div><label>Gaji Akhir RM</label><input id="gajiP" type="number" value="4000"></div></div><button onclick="kiraPencen()">Kira Pencen</button><div id="resPencen" class="kalk-result" style="display:none"></div></div>
+  <div class="kalk-card"><h4>🔵 GCR 180 Hari SSPA 2024</h4><label>Gaji Akhir RM</label><input id="gajiGCR" type="number" value="3500"><label>Hari GCR max 180</label><input id="hariGCR" type="number" value="180"><button onclick="kiraGCR()">Kira GCR</button><div id="resGCR" class="kalk-result" style="display:none"></div></div>
+  <div class="kalk-card"><h4>🏦 LPPSA 4%</h4><label>Pinjaman RM</label><input id="loanAmt" type="number" value="300000"><label>Tahun</label><input id="loanYear" type="number" value="30"><button onclick="kiraLPPSA()">Kira LPPSA</button><div id="resLPPSA" class="kalk-result" style="display:none"></div></div>
+  <div class="kalk-card"><h4>👴 Pencen & Ganjaran (Betul)</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Tahun Berkhidmat</label><input id="tahunP" type="number" value="25"></div><div><label>Gaji Akhir RM</label><input id="gajiP" type="number" value="4000"></div></div><button onclick="kiraPencen()">Kira Pencen</button><div id="resPencen" class="kalk-result" style="display:none"></div></div>
 </div>
 
 <div id="p-profil" class="page">
-  <div class="card"><h3>ðŸ‘¤ Profil</h3><input id="nama" placeholder="Nama" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gred" placeholder="Gred N41" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gajiProf" placeholder="Gaji RM" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><button onclick="saveProfil()" style="width:100%;padding:12px;background:#1e40af;color:#fff;border:none;border-radius:10px;font-weight:800">Simpan</button></div>
+  <div class="card"><h3>👤 Profil</h3><input id="nama" placeholder="Nama" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gred" placeholder="Gred N41" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gajiProf" placeholder="Gaji RM" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><button onclick="saveProfil()" style="width:100%;padding:12px;background:#1e40af;color:#fff;border:none;border-radius:10px;font-weight:800">Simpan</button></div>
 </div>
 
 <div id="p-berita" class="page">
-  <div class="card"><b>ðŸ“° Feed Berita - Penjawat Awam & Semasa</b><br><span style="font-size:12px;color:#64748b">Auto update dari Facebook Page rasmi - Berita Harian, Sinar Harian, JPA, Anwar Ibrahim. Scroll untuk lihat post terbaru.</span></div>
-  
-  <div style="display:grid;grid-template-columns:1fr;gap:12px">
-    <div class="card" style="padding:0;overflow:hidden">
-      <div style="padding:10px 14px;background:#1e40af;color:#fff;font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>ðŸ“˜ Berita Harian</span><a href="https://www.facebook.com/bharianmy" target="_blank" style="color:#fbbf24;font-size:11px">Buka FB</a></div>
-      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbharianmy&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-    </div>
-    
-    <div class="card" style="padding:0;overflow:hidden">
-      <div style="padding:10px 14px;background:#b91c1c;color:#fff;font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>ðŸ“° Sinar Harian</span><a href="https://www.facebook.com/SinarHarian" target="_blank" style="color:#fde68a;font-size:11px">Buka FB</a></div>
-      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSinarHarian&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-    </div>
-
-    <div class="card" style="padding:0;overflow:hidden">
-      <div style="padding:10px 14px;background:#065f46;color:#fff;font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>ðŸ›ï¸ JPA - Jabatan Perkhidmatan Awam</span><a href="https://www.facebook.com/JabatanPerkhidmatanAwam" target="_blank" style="color:#a7f3d0;font-size:11px">Buka FB</a></div>
-      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FJabatanPerkhidmatanAwam&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-    </div>
-
-    <div class="card" style="padding:0;overflow:hidden">
-      <div style="padding:10px 14px;background:#1e3a8a;color:#fff;font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>ðŸ‡²ðŸ‡¾ Anwar Ibrahim - PM</span><a href="https://www.facebook.com/anwaribrahimofficial" target="_blank" style="color:#93c5fd;font-size:11px">Buka FB</a></div>
-      <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fanwaribrahimofficial&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-    </div>
-  </div>
-  
-  <div class="card" style="margin-top:12px;background:#fffbeb;border-color:#fde68a"><b>ðŸ’¡ Tak keluar feed?</b><br><span style="font-size:12px">Facebook block iframe di sesetengah browser. Klik <b>Buka FB</b> di atas untuk lihat terus di Facebook. Atau guna browser Chrome, bukan Facebook in-app browser.</span></div>
+  <div class="card"><b>📰 Berita SSPA 2024</b><br>GCR naik 180 hari • Ex Gratia naik RM100k • COLA RM300 • LPPSA kekal 4%</div>
 </div>
 
-<div class="input-bar" id="inputBar"><input id="chatInput" placeholder="Tanya soalan... cth: GCR 180 hari"><button onclick="sendMsg()">âž¤</button></div>
+<div class="input-bar" id="inputBar"><input id="chatInput" placeholder="Tanya soalan... cth: GCR 180 hari"><button onclick="sendMsg()">➤</button></div>
 
 <script>
 function openTab(name){
@@ -149,9 +126,9 @@ function addMsg(txt,who){
   window.scrollTo(0,document.body.scrollHeight);
 }
 document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter') sendMsg();});
-function kiraGCR(){var g=parseFloat(document.getElementById('gajiGCR').value)||0; var h=Math.min(parseFloat(document.getElementById('hariGCR').value)||0,180); var r=g*h/30; var el=document.getElementById('resGCR'); el.style.display='block'; el.innerHTML='GCR = RM'+r.toFixed(2)+'<br><small>'+h+' hari x RM'+g+'/30 â€¢ Max 180 hari SSPA 2024</small>';}
-function kiraLPPSA(){var P=parseFloat(document.getElementById('loanAmt').value)||0; var y=parseFloat(document.getElementById('loanYear').value)||0; var r=0.04/12; var n=y*12; var m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); var el=document.getElementById('resLPPSA'); el.style.display='block'; el.innerHTML='Bulanan RM'+m.toFixed(2)+'<br><small>Total RM'+(m*n).toFixed(2)+' â€¢ 4% flat</small>';}
-function kiraPencen(){var t=parseFloat(document.getElementById('tahunP').value)||0; var g=parseFloat(document.getElementById('gajiP').value)||0; var b=t*12; var gan=b*g*0.075; var pen=Math.min(b/600*g,g*0.6); var el=document.getElementById('resPencen'); el.style.display='block'; el.innerHTML='Ganjaran RM'+gan.toFixed(2)+'<br>Pencen RM'+pen.toFixed(2)+'/bulan<br><small>'+t+' tahun='+b+' bulan â€¢ Ganjaran='+b+'x'+g+'x7.5% â€¢ Pencen='+b+'/600x'+g+' â€¢ Max 60% RM'+(g*0.6).toFixed(0)+'</small>';}
+function kiraGCR(){var g=parseFloat(document.getElementById('gajiGCR').value)||0; var h=Math.min(parseFloat(document.getElementById('hariGCR').value)||0,180); var r=g*h/30; var el=document.getElementById('resGCR'); el.style.display='block'; el.innerHTML='GCR = RM'+r.toFixed(2)+'<br><small>'+h+' hari x RM'+g+'/30 • Max 180 hari SSPA 2024</small>';}
+function kiraLPPSA(){var P=parseFloat(document.getElementById('loanAmt').value)||0; var y=parseFloat(document.getElementById('loanYear').value)||0; var r=0.04/12; var n=y*12; var m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); var el=document.getElementById('resLPPSA'); el.style.display='block'; el.innerHTML='Bulanan RM'+m.toFixed(2)+'<br><small>Total RM'+(m*n).toFixed(2)+' • 4% flat</small>';}
+function kiraPencen(){var t=parseFloat(document.getElementById('tahunP').value)||0; var g=parseFloat(document.getElementById('gajiP').value)||0; var b=t*12; var gan=b*g*0.075; var pen=Math.min(b/600*g,g*0.6); var el=document.getElementById('resPencen'); el.style.display='block'; el.innerHTML='Ganjaran RM'+gan.toFixed(2)+'<br>Pencen RM'+pen.toFixed(2)+'/bulan<br><small>'+t+' tahun='+b+' bulan • Ganjaran='+b+'x'+g+'x7.5% • Pencen='+b+'/600x'+g+' • Max 60% RM'+(g*0.6).toFixed(0)+'</small>';}
 function saveProfil(){localStorage.setItem('cc_nama',document.getElementById('nama').value); localStorage.setItem('cc_gred',document.getElementById('gred').value); localStorage.setItem('cc_gaji',document.getElementById('gajiProf').value); alert('Profil disimpan');}
 </script>
 </body>
