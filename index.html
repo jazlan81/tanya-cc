@@ -97,29 +97,53 @@ function clearProfileV26(){
     const stat=document.getElementById('myStats'); if(stat) stat.innerHTML='❌ Belum isi profil';
   }
 }
+
 async function loadNewsLiveV26(){
   const container = document.getElementById('newsList') || document.getElementById('beritaList');
-  if(!container) return;
+  if(!container) { console.log('newsList not found'); return; }
   container.innerHTML='<div style="padding:20px;text-align:center">Loading berita live...</div>';
   if(!window.supaClient){ container.innerHTML='<div class="card">Supabase belum connect</div>'; return; }
   try{
     const {data,error}=await window.supaClient.from('news_feed').select('*').order('created_at',{ascending:false}).limit(20);
     if(error) throw error;
-    if(!data || data.length===0){ container.innerHTML='<div class="card">Belum ada berita - tambah di Supabase news_feed</div>'; return; }
-    container.innerHTML = data.map(n=>`
-      <div class="card" style="${n.penting?'border-left:4px solid #FFD700;background:#fffbeb':''};margin-bottom:12px">
-        ${n.penting?'<span style="background:#FFD700;color:#0A2A5A;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:800">🔥 PENTING</span>':''}
-        <div style="font-weight:800;margin:8px 0;font-size:15px">${n.title}</div>
-        <div style="font-size:13px;color:#334155;line-height:1.5">${n.content}</div>
-        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
-          <span style="background:#eef2ff;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600">${n.category||'Umum'}</span>
+    if(!data || data.length===0){ container.innerHTML='<div class="card">Belum ada berita - tambah di Supabase news_feed<br><small>Insert Title, Content, Category, sumber_url</small></div>'; return; }
+    container.innerHTML = data.map(n=>{
+      let videoHtml='';
+      const url = n.sumber_url || n.video_url || '';
+      if(url){
+        if(url.includes('youtube.com') || url.includes('youtu.be')){
+          let vid = '';
+          if(url.includes('youtu.be')) vid = url.split('/').pop().split('?')[0];
+          else {
+            const m = url.match(/v=([^&]+)/);
+            vid = m ? m[1] : '';
+          }
+          if(vid) videoHtml = `<div style="margin:10px 0"><iframe width="100%" height="200" src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen style="border-radius:12px"></iframe></div>`;
+        } else if(url.match(/\.(mp4|webm|mov)$/i)){
+          videoHtml = `<div style="margin:10px 0"><video controls style="width:100%;border-radius:12px;max-height:300px"><source src="${url}" type="video/mp4">Browser tak support video</video></div>`;
+        }
+      }
+      const linkHtml = n.sumber_url ? `<a href="${n.sumber_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#0A2A5A;color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;text-decoration:none">📄 Buka Sumber Rasmi →</a>` : '';
+      return `
+      <div class="card" style="${n.penting?'border-left:4px solid #FFD700;background:#fffbeb':''};margin-bottom:14px;padding:16px">
+        ${n.penting?'<span style="background:#FFD700;color:#0A2A5A;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:800">🔥 PENTING</span>':''}
+        <div style="font-weight:800;margin:10px 0;font-size:15px;line-height:1.4">${n.title}</div>
+        <div style="font-size:13px;color:#334155;line-height:1.6">${(n.content||'').replace(/
+/g,'<br>')}</div>
+        ${videoHtml}
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span style="background:#eef2ff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600">${n.category||'Umum'}</span>
           <small style="color:#94a3b8">${(n.created_at||'').slice(0,10)}</small>
         </div>
-        ${n.sumber_url?`<a href="${n.sumber_url}" target="_blank" style="font-size:12px;color:#0A2A5A;display:block;margin-top:8px">📄 Sumber rasmi →</a>`:''}
-      </div>
-    `).join('');
-  }catch(e){ container.innerHTML=`<div class="card">Gagal load berita: ${e.message}<br><small>Check Supabase news_feed table RLS policy</small></div>`; }
+        ${linkHtml}
+      </div>`;
+    }).join('');
+  }catch(e){ 
+    container.innerHTML=`<div class="card" style="background:#fee2e2">❌ Gagal load berita: ${e.message}<br><small>Pastikan RLS policy news_feed allow anon read<br>SQL: create policy "allow anon" on news_feed for all using (true)</small></div>`; 
+    console.error(e);
+  }
 }
+
 async function loadFeedbackLiveV26(){
   const fbList=document.getElementById('fbList'); const dashList=document.getElementById('dashList'); const dashStats=document.getElementById('dashStats');
   if(!fbList && !dashList) return;
@@ -196,6 +220,52 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }, 1000);
 });
+</script>
+
+
+<script>
+// V2.6.1 PROFILE FORCE EDITABLE
+function forceProfileEditable(){
+  const ids = ['profileNama','profileGred','profileGaji','profileJabatan'];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.readOnly=false;
+      el.disabled=false;
+      el.style.pointerEvents='auto';
+      el.style.opacity='1';
+      el.style.background='#fff';
+    }
+  });
+  // auto fill from local
+  try{
+    const saved = JSON.parse(localStorage.getItem('cc_profile')||'{}');
+    if(saved.nama && document.getElementById('profileNama')) document.getElementById('profileNama').value=saved.nama;
+    if(saved.gred && document.getElementById('profileGred')) document.getElementById('profileGred').value=saved.gred;
+    if(saved.gaji && document.getElementById('profileGaji')) document.getElementById('profileGaji').value=saved.gaji;
+    if(saved.jabatan && document.getElementById('profileJabatan')) document.getElementById('profileJabatan').value=saved.jabatan;
+  }catch(e){}
+}
+window.addEventListener('load', ()=>{ setTimeout(forceProfileEditable, 500); setTimeout(forceProfileEditable, 1500); setTimeout(forceProfileEditable, 3000); });
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('#profil, #profile, [id*=profil]')){
+    setTimeout(forceProfileEditable, 100);
+  }
+});
+const oldShowTabProfile = window.showTab;
+window.showTab = function(id){
+  if(oldShowTabProfile) oldShowTabProfile(id);
+  else {
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    const t=document.getElementById(id); if(t) t.classList.add('active');
+  }
+  if(id==='profil' || id==='profile'){
+    setTimeout(forceProfileEditable, 100);
+  }
+  if(id==='berita' || id==='news'){
+    setTimeout(()=>{ if(typeof loadNewsLiveV26==='function') loadNewsLiveV26(); }, 100);
+  }
+};
 </script>
 
 </body>
