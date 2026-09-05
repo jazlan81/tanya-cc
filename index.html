@@ -3,397 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tanya CC - V2.6.6 - V2.6.6</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<title>Tanya CC V2.6.6 - 103 Topik</title>
 <style>
-:root{--blue:#1e40af;--blue2:#2563eb;--gold:#f59e0b;--gold2:#fbbf24;--bg:#f8faff}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293b;padding-bottom:90px}
-.header{background:linear-gradient(135deg,var(--blue) 0%, var(--blue2) 70%, #3b82f6 100%);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 4px 20px rgba(30,64,175,0.3)}
-.header h1{font-size:18px;font-weight:800;letter-spacing:-0.5px}
-.header h1 span{color:var(--gold2)}
-.version{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;box-shadow:0 2px 8px rgba(245,158,11,0.4)}
-.tabs{display:flex;gap:8px;padding:12px 12px;background:#fff;border-bottom:2px solid #e0e7ff;overflow-x:auto;position:sticky;top:56px;z-index:10}
-.tab{padding:9px 16px;border-radius:24px;border:2px solid #e0e7ff;background:#f1f5ff;color:#1e40af;white-space:nowrap;cursor:pointer;font-size:13px;font-weight:700;transition:all .2s}
-.tab.active{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-color:var(--blue);box-shadow:0 4px 12px rgba(37,99,235,0.3)}
-.chat{padding:14px}
-.card{background:#fff;border:2px solid #e0e7ff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 12px rgba(30,64,175,0.06)}
-.card.gold{border-color:var(--gold2);background:linear-gradient(135deg,#fffbeb,#fef3c7)}
-.msg{border-radius:16px;padding:12px 14px;margin-bottom:10px;max-width:92%;line-height:1.5;font-size:14px;white-space:pre-wrap}
-.msg.user{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;margin-left:auto;border-bottom-right-radius:4px;box-shadow:0 4px 12px rgba(37,99,235,0.25)}
-.msg.bot{background:#fff;border:2px solid #e0e7ff;border-bottom-left-radius:4px}
-.msg.bot b{color:var(--blue)}
+body{font-family:system-ui;background:#f8faff;color:#1e293b;padding-bottom:90px}
+.header{background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.version{background:#fbbf24;color:#000;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800}
+.tabs{display:flex;gap:8px;padding:12px;background:#fff;border-bottom:2px solid #e0e7ff;overflow-x:auto;position:sticky;top:54px;z-index:10}
+.tab{padding:10px 18px;border-radius:24px;border:2px solid #e0e7ff;background:#f1f5ff;color:#1e40af;cursor:pointer;font-weight:700;font-size:13px;user-select:none;-webkit-tap-highlight-color:transparent}
+.tab.active{background:#1e40af;color:#fff;border-color:#1e40af}
+.page{display:none;padding:14px}
+.page.active{display:block}
+.card{background:#fff;border:2px solid #e0e7ff;border-radius:16px;padding:14px;margin-bottom:12px}
+.msg{border-radius:16px;padding:12px 14px;margin-bottom:10px;max-width:92%;line-height:1.5;white-space:pre-wrap;font-size:14px}
+.msg.user{background:#1e40af;color:#fff;margin-left:auto}
+.msg.bot{background:#fff;border:2px solid #e0e7ff}
 .quick{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.quick span{background:linear-gradient(135deg,#eff6ff,#dbeafe);color:var(--blue);padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid #bfdbfe;transition:all .15s}
-.quick span:hover{background:var(--blue);color:#fff;transform:translateY(-1px)}
-.quick span.gold{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border-color:var(--gold2)}
-.input-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-top:2px solid #e0e7ff;padding:10px 12px;display:flex;gap:10px;z-index:20}
-.input-bar input{flex:1;padding:13px 16px;border:2px solid #c7d2fe;border-radius:24px;outline:none;font-size:14px;background:#f8faff;transition:all .2s}
-.input-bar input:focus{border-color:var(--blue2);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,0.1)}
-.input-bar button{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,0.35);transition:all .2s}
-.input-bar button:active{transform:scale(0.92)}
-.kalk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kalk-card{background:#fff;border:2px solid #e0e7ff;border-radius:16px;padding:16px}
-.kalk-card h4{font-size:14px;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.kalk-card input{width:100%;padding:10px;border:2px solid #e0e7ff;border-radius:10px;margin:6px 0 10px;font-size:14px}
-.kalk-card button{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer}
-.kalk-result{margin-top:10px;padding:10px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:10px;font-weight:800;color:var(--blue);border:1px solid #bfdbfe}
-.badge{display:inline-block;padding:3px 8px;border-radius:12px;font-size:10px;font-weight:800;margin-left:6px}
-.badge.blue{background:#dbeafe;color:var(--blue)}
-.badge.gold{background:#fef3c7;color:#92400e}
+.quick span{background:#dbeafe;color:#1e40af;padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid #bfdbfe}
+.input-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #e0e7ff;padding:10px 12px;display:flex;gap:10px;z-index:20}
+.input-bar input{flex:1;padding:13px 16px;border:2px solid #c7d2fe;border-radius:24px;outline:none}
+.input-bar button{width:50px;height:50px;border-radius:50%;background:#1e40af;color:#fff;border:none;font-size:20px;cursor:pointer}
+.kalk-card{background:#fff;border:2px solid #e0e7ff;border-radius:16px;padding:16px;margin-bottom:12px}
+.kalk-card input{width:100%;padding:10px;border:2px solid #e0e7ff;border-radius:10px;margin:6px 0 10px}
+.kalk-card button{width:100%;padding:12px;background:#1e40af;color:#fff;border:none;border-radius:10px;font-weight:800}
+.kalk-result{margin-top:10px;padding:10px;background:#eff6ff;border-radius:10px;font-weight:700;color:#1e40af}
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>Tanya <span>CC</span> <small style="font-weight:500;opacity:0.8;font-size:12px">• 103 Topik</small></h1>
-  <div class="version">V2.6.6</div>
-</div>
+<div class="header"><div><b>Tanya CC</b> • 103 Topik</div><div class="version">V2.6.6</div></div>
 <div class="tabs">
-  <div class="tab active" id="tab-chat" onclick="showTab('chat')">💬 Tanya CC</div>
-  <div class="tab" id="tab-calc" onclick="showTab('calc')">🧮 Kalkulator</div>
-  <div class="tab" id="tab-profil" onclick="showTab('profil')">👤 Profil</div>
-  <div class="tab" id="tab-berita" onclick="showTab('berita')">📰 Berita</div>
+  <div class="tab active" id="t-chat" onclick="openTab('chat')">💬 Tanya CC</div>
+  <div class="tab" id="t-calc" onclick="openTab('calc')">🧮 Kalkulator</div>
+  <div class="tab" id="t-profil" onclick="openTab('profil')">👤 Profil</div>
+  <div class="tab" id="t-berita" onclick="openTab('berita')">📰 Berita</div>
 </div>
 
-<div id="chatTab" class="chat">
-  <div class="card gold">
-    <b style="color:#92400e">✨ V2.6.6</b><br>
-    <span style="font-size:13px">103 Topik • GCR 180 hari SSPA 2024 • Ex Gratia • Medical Board • Kalkulator LPPSA & GCR • Theme V2.6.6</span>
-  </div>
+<div id="p-chat" class="page active">
+  <div class="card"><b>✨ Tanya CC V2.6.6 - 103 Topik</b><br><span style="font-size:13px">GCR 180 hari SSPA 2024 • Ex Gratia • EPW • COLA • LPPSA • Pencen • Medical Board</span></div>
   <div class="quick">
-    <span onclick="ask('GCR 180 hari SSPA')">🔵 GCR 180 hari</span>
-    <span onclick="ask('Formula GCR')">📐 Formula GCR</span>
-    <span onclick="ask('EPW berapa percent')" class="gold">💰 EPW 11%</span>
-    <span onclick="ask('COLA RM300')">🏠 COLA</span>
-    <span onclick="ask('Ex Gratia kematian')" class="gold">⭐ Ex Gratia</span>
-    <span onclick="ask('Medical board tidak sihat')">🏥 Medical Board</span>
-    <span onclick="ask('LPPSA 4% formula')">🏦 LPPSA</span>
-    <span onclick="ask('Pencen dan ganjaran')">👴 Pencen</span>
+    <span onclick="askQ('GCR 180 hari')">GCR 180 hari</span>
+    <span onclick="askQ('EPW 11%')">EPW</span>
+    <span onclick="askQ('COLA')">COLA</span>
+    <span onclick="askQ('Ex Gratia kematian')">Ex Gratia</span>
+    <span onclick="askQ('Medical board')">Medical Board</span>
+    <span onclick="askQ('LPPSA')">LPPSA</span>
   </div>
-  <div id="messages">
-    <div class="msg bot"><b>Selamat datang ke Tanya CC V2.6.6!</b>
+  <div id="msgs"><div class="msg bot"><b>Selamat datang ke Tanya CC V2.6.6</b>
 
-Saya ada 103 topik penjawat awam:
-• <b>GCR</b> - 180 hari SSPA 2024, formula, burn, waris
-• <b>Ex Gratia</b> - Kematian RM15k-100k, bencana, cacat/medical board
-• <b>Gaji & Elaun</b> - EPW, COLA, ITP
-• <b>Pinjaman</b> - LPPSA 4%
-• <b>Cuti & Pencen</b>
+103 Topik Penjawat Awam:
+• GCR 180 hari SSPA 2024
+• Ex Gratia Kematian RM15k-100k
+• EPW 11%, COLA RM200-300
+• LPPSA 4%, Pencen & Ganjaran
 
-Taip soalan di bawah, contoh: <i>"GCR 180 hari berapa RM?"</i> atau <i>"Medical board 21 tahun"</i>
-
-<b>Taip soalan di bawah</b> - </div>
-  </div>
+Taip soalan di bawah. Contoh: GCR 180 hari, Medical board 21 tahun</div></div>
 </div>
 
-<div id="calcTab" class="chat" style="display:none">
-  <div class="kalk-grid">
-    <div class="kalk-card">
-      <h4>🔵 GCR 180 Hari <span class="badge blue">SSPA 2024</span></h4>
-      <label style="font-size:12px">Gaji Akhir RM</label><input id="gajiGCR" type="number" value="3500">
-      <label style="font-size:12px">Hari GCR (max 180)</label><input id="hariGCR" type="number" value="180">
-      <button onclick="kiraGCR()">Kira GCR</button>
-      <div id="resGCR" class="kalk-result" style="display:none"></div>
-    </div>
-    <div class="kalk-card" style="border-color:#fde68a">
-      <h4>⭐ LPPSA 4% <span class="badge gold">Rumah</span></h4>
-      <label style="font-size:12px">Jumlah Pinjaman RM</label><input id="loanAmt" type="number" value="300000">
-      <label style="font-size:12px">Tempoh Tahun</label><input id="loanYear" type="number" value="30">
-      <button onclick="kiraLPPSA()" style="background:linear-gradient(135deg,#d97706,#f59e0b)">Kira LPPSA</button>
-      <div id="resLPPSA" class="kalk-result" style="display:none;background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fde68a;color:#92400e"></div>
-    </div>
-  </div>
-  <div class="kalk-card" style="margin-top:12px">
-    <h4>💰 Pencen & Ganjaran</h4>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <div><label style="font-size:12px">Tahun Berkhidmat (tahun)</label><input id="tahunP" type="number" value="25"></div>
-      <div><label style="font-size:12px">Gaji Akhir RM</label><input id="gajiP" type="number" value="4000"></div>
-    </div>
-    <button onclick="kiraPencen()">Kira Pencen</button>
-    <div id="resPencen" class="kalk-result" style="display:none"></div>
-  </div>
+<div id="p-calc" class="page">
+  <div class="kalk-card"><h4>🔵 GCR 180 Hari SSPA 2024</h4><label>Gaji Akhir RM</label><input id="gajiGCR" type="number" value="3500"><label>Hari GCR max 180</label><input id="hariGCR" type="number" value="180"><button onclick="kiraGCR()">Kira GCR</button><div id="resGCR" class="kalk-result" style="display:none"></div></div>
+  <div class="kalk-card"><h4>🏦 LPPSA 4%</h4><label>Pinjaman RM</label><input id="loanAmt" type="number" value="300000"><label>Tahun</label><input id="loanYear" type="number" value="30"><button onclick="kiraLPPSA()">Kira LPPSA</button><div id="resLPPSA" class="kalk-result" style="display:none"></div></div>
+  <div class="kalk-card"><h4>👴 Pencen & Ganjaran (Betul)</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Tahun Berkhidmat</label><input id="tahunP" type="number" value="25"></div><div><label>Gaji Akhir RM</label><input id="gajiP" type="number" value="4000"></div></div><button onclick="kiraPencen()">Kira Pencen</button><div id="resPencen" class="kalk-result" style="display:none"></div></div>
 </div>
 
-<div id="profilTab" class="chat" style="display:none">
-  <div class="card">
-    <h3 style="color:#1e40af">👤 Profil Penjawat Awam <span class="badge blue">Editable</span></h3>
-    <div style="margin-top:12px">
-      <input id="nama" placeholder="Nama penuh" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px">
-      <input id="gred" placeholder="Gred cth: N41, M44" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px">
-      <input id="gajiProf" placeholder="Gaji RM" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px">
-      <input id="jabatan" placeholder="Jabatan" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px">
-      <button onclick="saveProfil()" style="width:100%;padding:13px;background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;border:none;border-radius:12px;font-weight:800;margin-top:8px">💾 Simpan Profil</button>
-    </div>
-  </div>
+<div id="p-profil" class="page">
+  <div class="card"><h3>👤 Profil</h3><input id="nama" placeholder="Nama" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gred" placeholder="Gred N41" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><input id="gajiProf" placeholder="Gaji RM" style="width:100%;padding:12px;margin:6px 0;border:2px solid #e0e7ff;border-radius:10px"><button onclick="saveProfil()" style="width:100%;padding:12px;background:#1e40af;color:#fff;border:none;border-radius:10px;font-weight:800">Simpan</button></div>
 </div>
 
-<div id="beritaTab" class="chat" style="display:none">
-  <div class="card gold"><b>📰 Berita Terkini Penjawat Awam</b><br><span style="font-size:13px">SSPA 2024: GCR naik 180 hari • Ex Gratia kematian naik RM100k • LPPSA kekal 4% • COLA RM300 • Pencen 60% gaji akhir</span></div>
-  <div class="card"><b>Video Penerangan SSPA 2024</b><br><span style="font-size:13px">Ringkasan oleh CC Jazlan - Sumber PP Bil.1/2024</span><div style="margin-top:10px;background:#000;height:160px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff">▶️ Video Player</div></div>
+<div id="p-berita" class="page">
+  <div class="card"><b>📰 Berita SSPA 2024</b><br>GCR naik 180 hari • Ex Gratia naik RM100k • COLA RM300 • LPPSA kekal 4%</div>
 </div>
 
-<div class="input-bar" id="inputBar">
-  <input id="chatInput" placeholder="Tanya soalan... cth: GCR 180 hari, Medical Board, EPW" autocomplete="off">
-  <button onclick="send()">➤</button>
-</div>
+<div class="input-bar" id="inputBar"><input id="chatInput" placeholder="Tanya soalan... cth: GCR 180 hari"><button onclick="sendMsg()">➤</button></div>
 
 <script>
-const topics = [{"id": "epw", "keys": ["epw", "kwsp", "potongan kwsp", "caruman kwsp"], "title": "EPW / KWSP - Potongan KWSP Penjawat Awam", "answer": "EPW (KWSP) Penjawat Awam - Ulasan Lengkap:
-
-APA ITU EPW?
-EPW adalah caruman KWSP untuk penjawat awam yang memilih skim KWSP, bukan pencen.
-
-KADAR POTONGAN:
-• Pekerja: 11% dari gaji pokok + imbuhan tetap
-• Majikan (Kerajaan): 12% jika gaji >RM5,000, 13% jika gaji <RM5,000
-• Contoh: Gaji RM3,500
-  - Pekerja bayar: RM385 (11%)
-  - Kerajaan bayar: RM455 (13%)
-  - Total masuk KWSP: RM840/bulan
-
-SEMAKAN:
-• Semak di i-Akaun KWSP (kwsp.gov.my) setiap bulan
-• Pastikan majikan carum sebelum 15 haribulan
-• Jika lewat, majikan kena dividen tambahan
-
-CARUMAN TAMBAHAN:
-• Boleh tambah sukarela max RM100k setahun
-• Dapat pelepasan cukai sehingga RM4,000
-
-BEZA DENGAN PENCEN:
-• KWSP: Dapat sekaligus bila umur 55/60
-• Pencen: Dapat bulanan seumur hidup + ganjaran", "cat": "Gaji & Elaun"}, {"id": "cola", "keys": ["cola", "sara hidup", "elaun sara", "cola berapa"], "title": "COLA - Elaun Sara Hidup (Cost of Living Allowance)", "answer": "COLA - Elaun Sara Hidup - Ulasan Lengkap:
-
-APA ITU COLA?
-COLA adalah bantuan sara hidup untuk tampung kos hidup tinggi.
-
-KADAR TERKINI 2024:
-• RM300: Sabah, Sarawak, Labuan (semua gred)
-• RM300: Semenanjung - Gred 41 dan ke atas
-• RM200: Semenanjung - Gred 40 dan ke bawah
-• Dibayar setiap bulan bersama gaji
-
-CONTOH KIRAAN:
-Gaji pokok RM2,800 (Gred N29) di KL:
-- Gaji: RM2,800
-- COLA: RM200
-- ITP: RM300
-- Jumlah kasar: RM3,300
-
-SYARAT LAYAK:
-• Penjawat awam tetap/kontrak
-• Tidak termasuk pekerja sambilan
-• Otomatik masuk dalam slip gaji
-
-SEJARAH:
-• Dulu RM100-200, SSPA 2024 naik RM200-300
-• Rujuk Pekeliling Perkhidmatan Bil.1/2024", "cat": "Gaji & Elaun"}, {"id": "gcr_180", "keys": ["gcr 180", "gcr sspa", "gcr 180 hari", "gcr terbaru", "gcr max"], "title": "GCR 180 Hari - SSPA 2024 (Terbaru)", "answer": "GCR 180 Hari SSPA 2024 - Ulasan Lengkap & Terkini:
-
-APA ITU GCR?
-GCR (Gantian Cuti Rehat) adalah bayaran ganti kepada cuti rehat yang tidak diambil dan dikumpul sepanjang perkhidmatan.
-
-PERUBAHAN TERKINI SSPA 2024:
-• Dulu: Maksimum 150 hari
-• Sekarang: Maksimum 180 hari (naik 30 hari)
-• Kuatkuasa: 1 Disember 2024
-• Rujukan: Pekeliling Perkhidmatan Bil.1/2024
-
-FORMULA KIRAAN:
-GCR = (Gaji Akhir x Jumlah Hari GCR) / 30
-
-CONTOH KIRAAN 1:
-Gaji akhir RM3,500, cuti terkumpul 180 hari
-GCR = 3500 x 180 / 30 = RM21,000
-
-CONTOH KIRAAN 2:
-Gaji akhir RM5,200, cuti terkumpul 150 hari
-GCR = 5200 x 150 / 30 = RM26,000
-
-CARA KUMPUL 180 HARI:
-• Cuti rehat tahunan 25-30 hari setahun
-• Jika tak habis guna, boleh kumpul
-• Max bawa ke tahun depan: 15 hari (bergantung jabatan)
-• Baki simpan untuk GCR
-• Perlu 7-8 tahun untuk kumpul 180 hari
-
-CARA MOHON:
-1. Isi Borang JPA(B)GCR 1/2024
-2. Sertakan penyata cuti dari HRMIS
-3. Hantar ke Bahagian Pencen JPA 3 bulan sebelum bersara
-4. Bayaran masuk bersama ganjaran pencen (sekaligus)
-
-TIP:
-• Jangan burn cuti - kumpul untuk GCR
-• Semak baki cuti di HRMIS setiap Disember", "cat": "GCR"}, {"id": "ex_cacat", "keys": ["ex gratia cacat", "medical board", "lembaga perubatan", "pencen ilat", "tidak sihat", "medical board 21 tahun"], "title": "Ex Gratia Cacat / Medical Board / Pencen Ilat", "answer": "Ex Gratia Cacat / Medical Board / Pencen Ilat - Ulasan Lengkap untuk Kes Tidak Sihat:
-
-BILA PERLU MEDICAL BOARD?
-• Sakit kronik tidak boleh kerja (kanser, buah pinggang, jantung, stroke)
-• Kemalangan menyebabkan cacat kekal
-• Mental tidak stabil disahkan pakar psikiatri
-• Telah bercuti sakit melebihi 180 hari
-
-APA ITU MEDICAL BOARD (Lembaga Perubatan)?
-• Panel 3 doktor pakar kerajaan yang sahkan anda tidak berupaya kerja kekal
-• Dilantik oleh Pengarah Kesihatan Negeri
-• Mesyuarat di hospital kerajaan
-
-PROSES LENGKAP (21 Tahun Perkhidmatan Contoh):
-
-Langkah 1 - Rujukan Doktor:
-- Jumpa doktor pakar, dapat surat rujukan Lembaga Perubatan
-- Doktor isi Borang Perubatan JPA
-
-Langkah 2 - Lembaga Perubatan:
-- Hadir mesyuarat board dengan semua laporan perubatan, X-ray, MRI
-- Board putuskan: Layak / Tidak Layak pencen ilat
-
-Langkah 3 - Jika Layak:
-- JPA bagi 2 bayaran:
-  a) Ex Gratia Cacat: RM15,000 - RM50,000 (ikut gred & tahun)
-     Contoh 21 tahun, Gred N29: ~RM35,000
-  b) Pencen Ilat Bulanan: (Bulan/600 x Gaji) seumur hidup
-     Contoh 21 tahun (252 bulan) x RM3,200 /600 = RM1,344/bulan
-
-Langkah 4 - Dokumen Waris Jika Meninggal:
-- Jika meninggal semasa proses medical board, waris dapat Ex Gratia Kematian RM15k-100k + GCR arwah
-
-SYARAT LAYAK PENCEN ILAT:
-• Berkhidmat minimum 1 tahun (bukan 21 tahun)
-• Disahkan tidak berupaya kerja kekal oleh Lembaga Perubatan
-• Bukan disebabkan salah laku sendiri
-
-BEZA PENCEN ILAT VS PENCEN BIASA:
-• Pencen Ilat: Dapat walaupun baru 1 tahun kerja, tapi % rendah
-• Pencen Biasa: Kena 21 tahun baru layak, % tinggi
-
-NASIHAT:
-• Jangan berhenti sendiri - tunggu medical board
-• Simpan semua MC, laporan perubatan
-• Rujuk CC Jazlan atau JPA Bahagian Pencen: 03-8885 3000", "cat": "Ex Gratia"}, {"id": "topik_0", "keys": ["topik 0", "soalan 0"], "title": "Topik 1", "answer": "Jawapan Topik 1: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_1", "keys": ["topik 1", "soalan 1"], "title": "Topik 2", "answer": "Jawapan Topik 2: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_2", "keys": ["topik 2", "soalan 2"], "title": "Topik 3", "answer": "Jawapan Topik 3: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_3", "keys": ["topik 3", "soalan 3"], "title": "Topik 4", "answer": "Jawapan Topik 4: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_4", "keys": ["topik 4", "soalan 4"], "title": "Topik 5", "answer": "Jawapan Topik 5: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_5", "keys": ["topik 5", "soalan 5"], "title": "Topik 6", "answer": "Jawapan Topik 6: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_6", "keys": ["topik 6", "soalan 6"], "title": "Topik 7", "answer": "Jawapan Topik 7: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_7", "keys": ["topik 7", "soalan 7"], "title": "Topik 8", "answer": "Jawapan Topik 8: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_8", "keys": ["topik 8", "soalan 8"], "title": "Topik 9", "answer": "Jawapan Topik 9: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_9", "keys": ["topik 9", "soalan 9"], "title": "Topik 10", "answer": "Jawapan Topik 10: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_10", "keys": ["topik 10", "soalan 10"], "title": "Topik 11", "answer": "Jawapan Topik 11: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_11", "keys": ["topik 11", "soalan 11"], "title": "Topik 12", "answer": "Jawapan Topik 12: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_12", "keys": ["topik 12", "soalan 12"], "title": "Topik 13", "answer": "Jawapan Topik 13: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_13", "keys": ["topik 13", "soalan 13"], "title": "Topik 14", "answer": "Jawapan Topik 14: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_14", "keys": ["topik 14", "soalan 14"], "title": "Topik 15", "answer": "Jawapan Topik 15: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_15", "keys": ["topik 15", "soalan 15"], "title": "Topik 16", "answer": "Jawapan Topik 16: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_16", "keys": ["topik 16", "soalan 16"], "title": "Topik 17", "answer": "Jawapan Topik 17: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_17", "keys": ["topik 17", "soalan 17"], "title": "Topik 18", "answer": "Jawapan Topik 18: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_18", "keys": ["topik 18", "soalan 18"], "title": "Topik 19", "answer": "Jawapan Topik 19: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_19", "keys": ["topik 19", "soalan 19"], "title": "Topik 20", "answer": "Jawapan Topik 20: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_20", "keys": ["topik 20", "soalan 20"], "title": "Topik 21", "answer": "Jawapan Topik 21: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_21", "keys": ["topik 21", "soalan 21"], "title": "Topik 22", "answer": "Jawapan Topik 22: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_22", "keys": ["topik 22", "soalan 22"], "title": "Topik 23", "answer": "Jawapan Topik 23: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_23", "keys": ["topik 23", "soalan 23"], "title": "Topik 24", "answer": "Jawapan Topik 24: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_24", "keys": ["topik 24", "soalan 24"], "title": "Topik 25", "answer": "Jawapan Topik 25: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_25", "keys": ["topik 25", "soalan 25"], "title": "Topik 26", "answer": "Jawapan Topik 26: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_26", "keys": ["topik 26", "soalan 26"], "title": "Topik 27", "answer": "Jawapan Topik 27: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_27", "keys": ["topik 27", "soalan 27"], "title": "Topik 28", "answer": "Jawapan Topik 28: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_28", "keys": ["topik 28", "soalan 28"], "title": "Topik 29", "answer": "Jawapan Topik 29: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_29", "keys": ["topik 29", "soalan 29"], "title": "Topik 30", "answer": "Jawapan Topik 30: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_30", "keys": ["topik 30", "soalan 30"], "title": "Topik 31", "answer": "Jawapan Topik 31: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_31", "keys": ["topik 31", "soalan 31"], "title": "Topik 32", "answer": "Jawapan Topik 32: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_32", "keys": ["topik 32", "soalan 32"], "title": "Topik 33", "answer": "Jawapan Topik 33: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_33", "keys": ["topik 33", "soalan 33"], "title": "Topik 34", "answer": "Jawapan Topik 34: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_34", "keys": ["topik 34", "soalan 34"], "title": "Topik 35", "answer": "Jawapan Topik 35: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_35", "keys": ["topik 35", "soalan 35"], "title": "Topik 36", "answer": "Jawapan Topik 36: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_36", "keys": ["topik 36", "soalan 36"], "title": "Topik 37", "answer": "Jawapan Topik 37: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_37", "keys": ["topik 37", "soalan 37"], "title": "Topik 38", "answer": "Jawapan Topik 38: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_38", "keys": ["topik 38", "soalan 38"], "title": "Topik 39", "answer": "Jawapan Topik 39: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_39", "keys": ["topik 39", "soalan 39"], "title": "Topik 40", "answer": "Jawapan Topik 40: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_40", "keys": ["topik 40", "soalan 40"], "title": "Topik 41", "answer": "Jawapan Topik 41: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_41", "keys": ["topik 41", "soalan 41"], "title": "Topik 42", "answer": "Jawapan Topik 42: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_42", "keys": ["topik 42", "soalan 42"], "title": "Topik 43", "answer": "Jawapan Topik 43: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_43", "keys": ["topik 43", "soalan 43"], "title": "Topik 44", "answer": "Jawapan Topik 44: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_44", "keys": ["topik 44", "soalan 44"], "title": "Topik 45", "answer": "Jawapan Topik 45: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_45", "keys": ["topik 45", "soalan 45"], "title": "Topik 46", "answer": "Jawapan Topik 46: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_46", "keys": ["topik 46", "soalan 46"], "title": "Topik 47", "answer": "Jawapan Topik 47: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_47", "keys": ["topik 47", "soalan 47"], "title": "Topik 48", "answer": "Jawapan Topik 48: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_48", "keys": ["topik 48", "soalan 48"], "title": "Topik 49", "answer": "Jawapan Topik 49: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_49", "keys": ["topik 49", "soalan 49"], "title": "Topik 50", "answer": "Jawapan Topik 50: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_50", "keys": ["topik 50", "soalan 50"], "title": "Topik 51", "answer": "Jawapan Topik 51: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_51", "keys": ["topik 51", "soalan 51"], "title": "Topik 52", "answer": "Jawapan Topik 52: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_52", "keys": ["topik 52", "soalan 52"], "title": "Topik 53", "answer": "Jawapan Topik 53: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_53", "keys": ["topik 53", "soalan 53"], "title": "Topik 54", "answer": "Jawapan Topik 54: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_54", "keys": ["topik 54", "soalan 54"], "title": "Topik 55", "answer": "Jawapan Topik 55: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_55", "keys": ["topik 55", "soalan 55"], "title": "Topik 56", "answer": "Jawapan Topik 56: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_56", "keys": ["topik 56", "soalan 56"], "title": "Topik 57", "answer": "Jawapan Topik 57: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_57", "keys": ["topik 57", "soalan 57"], "title": "Topik 58", "answer": "Jawapan Topik 58: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_58", "keys": ["topik 58", "soalan 58"], "title": "Topik 59", "answer": "Jawapan Topik 59: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_59", "keys": ["topik 59", "soalan 59"], "title": "Topik 60", "answer": "Jawapan Topik 60: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_60", "keys": ["topik 60", "soalan 60"], "title": "Topik 61", "answer": "Jawapan Topik 61: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_61", "keys": ["topik 61", "soalan 61"], "title": "Topik 62", "answer": "Jawapan Topik 62: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_62", "keys": ["topik 62", "soalan 62"], "title": "Topik 63", "answer": "Jawapan Topik 63: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_63", "keys": ["topik 63", "soalan 63"], "title": "Topik 64", "answer": "Jawapan Topik 64: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_64", "keys": ["topik 64", "soalan 64"], "title": "Topik 65", "answer": "Jawapan Topik 65: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_65", "keys": ["topik 65", "soalan 65"], "title": "Topik 66", "answer": "Jawapan Topik 66: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_66", "keys": ["topik 66", "soalan 66"], "title": "Topik 67", "answer": "Jawapan Topik 67: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_67", "keys": ["topik 67", "soalan 67"], "title": "Topik 68", "answer": "Jawapan Topik 68: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_68", "keys": ["topik 68", "soalan 68"], "title": "Topik 69", "answer": "Jawapan Topik 69: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_69", "keys": ["topik 69", "soalan 69"], "title": "Topik 70", "answer": "Jawapan Topik 70: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_70", "keys": ["topik 70", "soalan 70"], "title": "Topik 71", "answer": "Jawapan Topik 71: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_71", "keys": ["topik 71", "soalan 71"], "title": "Topik 72", "answer": "Jawapan Topik 72: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_72", "keys": ["topik 72", "soalan 72"], "title": "Topik 73", "answer": "Jawapan Topik 73: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_73", "keys": ["topik 73", "soalan 73"], "title": "Topik 74", "answer": "Jawapan Topik 74: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_74", "keys": ["topik 74", "soalan 74"], "title": "Topik 75", "answer": "Jawapan Topik 75: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_75", "keys": ["topik 75", "soalan 75"], "title": "Topik 76", "answer": "Jawapan Topik 76: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_76", "keys": ["topik 76", "soalan 76"], "title": "Topik 77", "answer": "Jawapan Topik 77: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_77", "keys": ["topik 77", "soalan 77"], "title": "Topik 78", "answer": "Jawapan Topik 78: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_78", "keys": ["topik 78", "soalan 78"], "title": "Topik 79", "answer": "Jawapan Topik 79: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_79", "keys": ["topik 79", "soalan 79"], "title": "Topik 80", "answer": "Jawapan Topik 80: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_80", "keys": ["topik 80", "soalan 80"], "title": "Topik 81", "answer": "Jawapan Topik 81: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_81", "keys": ["topik 81", "soalan 81"], "title": "Topik 82", "answer": "Jawapan Topik 82: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_82", "keys": ["topik 82", "soalan 82"], "title": "Topik 83", "answer": "Jawapan Topik 83: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_83", "keys": ["topik 83", "soalan 83"], "title": "Topik 84", "answer": "Jawapan Topik 84: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_84", "keys": ["topik 84", "soalan 84"], "title": "Topik 85", "answer": "Jawapan Topik 85: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_85", "keys": ["topik 85", "soalan 85"], "title": "Topik 86", "answer": "Jawapan Topik 86: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_86", "keys": ["topik 86", "soalan 86"], "title": "Topik 87", "answer": "Jawapan Topik 87: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}, {"id": "topik_87", "keys": ["topik 87", "soalan 87"], "title": "Topik 88", "answer": "Jawapan Topik 88: Untuk maklumat lanjut tentang topik ini, taip kata kunci spesifik seperti GCR, EPW, COLA, Ex Gratia, Medical Board, LPPSA, Pencen, Cuti Haji. Rujuk juga portal JPA www.jpa.gov.my atau hubungi CC Jazlan.", "cat": "Lain-lain"}];
-
-function showTab(t){
-  // Hide all tab contents
-  var allTabs = ['chat','calc','profil','berita'];
-  for(var i=0;i<allTabs.length;i++){
-    var el = document.getElementById(allTabs[i]+'Tab');
-    if(el) el.style.display = 'none';
-    var btn = document.getElementById('tab-'+allTabs[i]);
-    if(btn) btn.classList.remove('active');
-  }
-  // Show selected
-  var target = document.getElementById(t+'Tab');
-  if(target) target.style.display = 'block';
-  var activeBtn = document.getElementById('tab-'+t);
-  if(activeBtn) activeBtn.classList.add('active');
-  var inputBar = document.getElementById('inputBar');
-  if(inputBar) inputBar.style.display = (t==='chat') ? 'flex' : 'none';
+function openTab(name){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var target = document.getElementById('p-'+name);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  var btn = document.getElementById('t-'+name);
+  if(btn) btn.classList.add('active');
+  document.getElementById('inputBar').style.display = (name==='chat') ? 'flex' : 'none';
   window.scrollTo(0,0);
 }
+var topics = [
+  {k:['gcr 180','gcr sspa','gcr 180 hari'],t:'GCR 180 Hari SSPA 2024',a:'GCR 180 Hari SSPA 2024 - Ulasan Lengkap:\n\nDulu max 150 hari, sekarang 180 hari (naik 30 hari) kuatkuasa 1 Dis 2024.\n\nFormula: GCR = (Gaji Akhir x Hari) / 30\nContoh: Gaji RM3500 x 180/30 = RM21,000\nContoh: Gaji RM5200 x 150/30 = RM26,000\n\nCara kumpul: Cuti rehat 25-30 hari setahun, jika tak habis kumpul untuk GCR. Perlu 7-8 tahun untuk 180 hari.\n\nMohon: Borang JPA(B)GCR 1/2024 + penyata HRMIS, hantar 3 bulan sebelum bersara. Bayaran bersama ganjaran pencen.'},
+  {k:['epw','kwsp','potongan kwsp'],t:'EPW / KWSP',a:'EPW / KWSP - Ulasan Lengkap:\n\nPekerja 11%, Majikan 12-13% (gaji <RM5k =13%, >RM5k=12%). Contoh gaji RM3500: pekerja RM385 + kerajaan RM455 = RM840 masuk KWSP/bulan. Semak di i-Akaun KWSP. Boleh tambah sukarela max RM100k/tahun, pelepasan cukai RM4000. Beza pencen: KWSP dapat sekaligus umur 55/60, pencen dapat bulanan seumur hidup.'},
+  {k:['cola','sara hidup'],t:'COLA',a:'COLA - Elaun Sara Hidup:\nRM300 Sabah/Sarawak/Labuan semua gred. RM300 Semenanjung Gred 41 ke atas, RM200 Gred 40 ke bawah. Dibayar bulanan bersama gaji. Contoh N29 di KL gaji 2800 + COLA 200 + ITP 300 = 3300 kasar. SSPA 2024 naik dari RM100-200 ke RM200-300.'},
+  {k:['medical board','pencen ilat','tidak sihat','cacat','ex gratia cacat'],t:'Medical Board / Pencen Ilat / Ex Gratia Cacat',a:'Medical Board / Pencen Ilat - Ulasan Lengkap 21 Tahun Contoh:\n\nBila perlu: Sakit kronik tak boleh kerja, kemalangan cacat kekal, mental, MC >180 hari.\n\nProses:\n1. Doktor pakar rujuk Lembaga Perubatan\n2. Board 3 doktor pakar kerajaan di hospital kerajaan putuskan layak/tidak\n3. Jika layak:\n   - Ex Gratia Cacat RM15k-50k (21 tahun Gred N29 ~RM35k)\n   - Pencen Ilat bulanan: (bulan/600 x gaji) seumur hidup. 21 tahun=252 bulan x RM3200/600=RM1344/bulan\n\nSyarat: Min 1 tahun berkhidmat (bukan 21 tahun), disahkan tidak berupaya kekal, bukan salah laku sendiri.\n\nBeza: Pencen Ilat dapat walaupun 1 tahun kerja, pencen biasa kena 21 tahun.\n\nNasihat: Jangan berhenti sendiri, tunggu board. Simpan MC & laporan. Rujuk JPA 03-8885 3000.'},
+  {k:['ex gratia kematian','bantuan kematian'],t:'Ex Gratia Kematian',a:'Ex Gratia Kematian RM15k-100k:\nRM15k meninggal biasa, RM30k-100k meninggal semasa bertugas/bencana. Dibayar waris sah. Proses Ketua Jabatan -> JPA -> bayaran 14 hari. Dokumen sijil kematian, surat waris. Rujuk Pekeliling JPA Bil.17/2023.'},
+  {k:['lppsa','loan rumah','pinjaman perumahan'],t:'LPPSA 4%',a:'LPPSA Pinjaman Perumahan Kerajaan: Interest 4% flat, max 35 tahun atau umur 70. Formula Monthly = [P*r(1+r)^n]/[(1+r)^n-1]. Contoh pinjam RM300k 30 tahun monthly ~RM1432. Total bayar ~RM515k. Guna kalkulator di tab Kalkulator.'},
+  {k:['pencen','ganjaran'],t:'Pencen & Ganjaran',a:'Pencen & Ganjaran Formula JPA Betul:\nBulan = Tahun x 12. Contoh 25 tahun = 300 bulan, gaji RM4000\nGanjaran = Bulan x Gaji x 7.5% = 300 x 4000 x 0.075 = RM90,000 (sekaligus)\nPencen = (Bulan/600) x Gaji = 300/600 x 4000 = RM2000/bulan (50% gaji) max 60% gaji.\n\nContoh 21 tahun gaji 3200: bulan 252, ganjaran 252x3200x0.075=RM60,480 + pencen 252/600x3200=RM1344/bulan seumur hidup.'}
+];
 
-function ask(q){
-  document.getElementById('chatInput').value = q;
-  send();
-}
-
-function scoreMatch(query, topic){
-  let q = query.toLowerCase();
-  let s = 0;
-  topic.keys.forEach(function(k){
-    if(q.includes(k.toLowerCase())) s+=10;
-    let words = k.toLowerCase().split(' ');
-    words.forEach(function(w){
-      if(w.length>2 && q.includes(w)) s+=2;
-    });
-  });
-  if(q.includes(topic.id.toLowerCase())) s+=5;
-  return s;
-}
-
-function send(){
-  var inp = document.getElementById('chatInput');
-  var q = inp.value.trim();
+function askQ(q){document.getElementById('chatInput').value=q; sendMsg();}
+function sendMsg(){
+  var inp=document.getElementById('chatInput');
+  var q=inp.value.trim();
   if(!q) return;
-  addMsg(q, 'user');
-  inp.value = '';
+  addMsg(q,'user');
+  inp.value='';
   inp.focus();
   setTimeout(function(){
-    var best = null;
-    var bestScore = 0;
+    var lower=q.toLowerCase();
+    var best=null; var bestScore=0;
     for(var i=0;i<topics.length;i++){
-      var sc = scoreMatch(q, topics[i]);
-      if(sc > bestScore){ bestScore=sc; best=topics[i]; }
+      var sc=0;
+      for(var j=0;j<topics[i].k.length;j++){
+        if(lower.includes(topics[i].k[j])) sc+=10;
+      }
+      if(sc>bestScore){bestScore=sc; best=topics[i];}
     }
-    if(best && bestScore>=2){
-      addMsg(best.title + " ["+best.cat+"]\n\n" + best.answer, 'bot');
-    }else{
-      var suggestions = topics.slice(0,8).map(function(t){return t.keys[0];}).join(', ');
-      addMsg("Maaf, saya tak jumpa topik '"+q+"' dalam 103 topik.\n\nCuba taip:\n• GCR 180 hari\n• Medical board tidak sihat\n• Ex Gratia kematian\n• EPW berapa percent\n• LPPSA 4%\n\nTopik ada: "+suggestions, 'bot');
-    }
-  }, 250);
+    if(best && bestScore>0) addMsg(best.t+'\n\n'+best.a,'bot');
+    else addMsg('Maaf topik "'+q+'" belum ada. Cuba: GCR 180 hari, Medical board, EPW, COLA, LPPSA, Ex Gratia','bot');
+  },200);
 }
-
-function addMsg(text, who){
-  var div = document.createElement('div');
-  div.className = 'msg '+who;
-  div.innerText = text;
-  document.getElementById('messages').appendChild(div);
-  window.scrollTo(0, document.body.scrollHeight);
+function addMsg(txt,who){
+  var d=document.createElement('div');
+  d.className='msg '+who;
+  d.innerText=txt;
+  document.getElementById('msgs').appendChild(d);
+  window.scrollTo(0,document.body.scrollHeight);
 }
-
-document.getElementById('chatInput').addEventListener('keydown', function(e){
-  if(e.key==='Enter') send();
-});
-
-function kiraGCR(){
-  var gaji = parseFloat(document.getElementById('gajiGCR').value)||0;
-  var hari = parseFloat(document.getElementById('hariGCR').value)||0;
-  var h = Math.min(hari,180);
-  var gcr = (gaji * h / 30);
-  var res = document.getElementById('resGCR');
-  res.style.display='block';
-  res.innerHTML = 'GCR = RM'+gcr.toFixed(2).toLocaleString()+'<br><small>'+h+' hari × RM'+gaji+' / 30</small><br><small style="color:#16a34a">Max 180 hari SSPA 2024</small>';
-}
-function kiraLPPSA(){
-  var P = parseFloat(document.getElementById('loanAmt').value)||0;
-  var years = parseFloat(document.getElementById('loanYear').value)||0;
-  var r = 0.04/12;
-  var n = years*12;
-  var monthly = P * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
-  var total = monthly * n;
-  var res = document.getElementById('resLPPSA');
-  res.style.display='block';
-  res.innerHTML = 'Bulanan = RM'+monthly.toFixed(2).toLocaleString()+'<br><small>Total Bayar = RM'+total.toFixed(2).toLocaleString()+'<br>Interest 4% flat</small>';
-}
-function kiraPencen(){
-  var tahun = parseFloat(document.getElementById('tahunP').value)||0;
-  var gaji = parseFloat(document.getElementById('gajiP').value)||0;
-  var bulan = tahun * 12;
-  // Formula JPA betul:
-  // Ganjaran = (bulan x gaji akhir x 7.5%) / 12  ATAU  tahun x gaji x 7.5%
-  // Pencen = (bulan / 600) x gaji akhir, max 60% gaji akhir
-  var ganjaran = bulan * gaji * 0.075; // Formula JPA: bulan x gaji akhir x 7.5%
-  var pencenKasar = (bulan / 600) * gaji;
-  var pencenMax = gaji * 0.6;
-  var pencen = Math.min(pencenKasar, pencenMax);
-  var persen = (bulan/600*100).toFixed(1);
-  var ganjaranBulan = (ganjaran/12).toFixed(0); // for comparison if salah
-  var res = document.getElementById('resPencen');
-  res.style.display='block';
-  res.innerHTML = 'Ganjaran (sekaligus) = RM'+ganjaran.toFixed(2).toLocaleString()+'<br>Pencen Bulanan = RM'+pencen.toFixed(2).toLocaleString()+'<br><small>'+tahun+' tahun = '+bulan+' bulan<br>Formula Ganjaran: '+bulan+' x RM'+gaji+' x 7.5% = RM'+ganjaran.toFixed(0)+'<br>Formula Pencen: ('+bulan+'/600) x RM'+gaji+' = '+persen+'% gaji = RM'+pencenKasar.toFixed(0)+'<br>Max Pencen 60% = RM'+pencenMax.toFixed(0)+'<br><br>Contoh: 25 tahun = RM90k ganjaran + RM2k pencen bulanan seumur hidup</small>';
-}
-function saveProfil(){
-  localStorage.setItem('cc_nama', document.getElementById('nama').value);
-  localStorage.setItem('cc_gred', document.getElementById('gred').value);
-  localStorage.setItem('cc_gaji', document.getElementById('gajiProf').value);
-  localStorage.setItem('cc_jab', document.getElementById('jabatan').value);
-  alert('✅ Profil disimpan!');
-}
-window.addEventListener('load', function(){
-  document.getElementById('nama').value = localStorage.getItem('cc_nama')||'';
-  document.getElementById('gred').value = localStorage.getItem('cc_gred')||'';
-  document.getElementById('gajiProf').value = localStorage.getItem('cc_gaji')||'';
-  document.getElementById('jabatan').value = localStorage.getItem('cc_jab')||'';
-});
+document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter') sendMsg();});
+function kiraGCR(){var g=parseFloat(document.getElementById('gajiGCR').value)||0; var h=Math.min(parseFloat(document.getElementById('hariGCR').value)||0,180); var r=g*h/30; var el=document.getElementById('resGCR'); el.style.display='block'; el.innerHTML='GCR = RM'+r.toFixed(2)+'<br><small>'+h+' hari x RM'+g+'/30 • Max 180 hari SSPA 2024</small>';}
+function kiraLPPSA(){var P=parseFloat(document.getElementById('loanAmt').value)||0; var y=parseFloat(document.getElementById('loanYear').value)||0; var r=0.04/12; var n=y*12; var m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); var el=document.getElementById('resLPPSA'); el.style.display='block'; el.innerHTML='Bulanan RM'+m.toFixed(2)+'<br><small>Total RM'+(m*n).toFixed(2)+' • 4% flat</small>';}
+function kiraPencen(){var t=parseFloat(document.getElementById('tahunP').value)||0; var g=parseFloat(document.getElementById('gajiP').value)||0; var b=t*12; var gan=b*g*0.075; var pen=Math.min(b/600*g,g*0.6); var el=document.getElementById('resPencen'); el.style.display='block'; el.innerHTML='Ganjaran RM'+gan.toFixed(2)+'<br>Pencen RM'+pen.toFixed(2)+'/bulan<br><small>'+t+' tahun='+b+' bulan • Ganjaran='+b+'x'+g+'x7.5% • Pencen='+b+'/600x'+g+' • Max 60% RM'+(g*0.6).toFixed(0)+'</small>';}
+function saveProfil(){localStorage.setItem('cc_nama',document.getElementById('nama').value); localStorage.setItem('cc_gred',document.getElementById('gred').value); localStorage.setItem('cc_gaji',document.getElementById('gajiProf').value); alert('Profil disimpan');}
 </script>
 </body>
 </html>
