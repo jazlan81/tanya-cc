@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tanya CC - V2.6.6 - Biru Golden</title>
+<title>Tanya CC - V2.6.6 </title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--blue:#1e40af;--blue2:#2563eb;--gold:#f59e0b;--gold2:#fbbf24;--bg:#f8faff}
@@ -46,7 +46,7 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
 <body>
 <div class="header">
   <h1>Tanya <span>CC</span> <small style="font-weight:500;opacity:0.8;font-size:12px">• 103 Topik</small></h1>
-  <div class="version">V2.6.6 • BIRU GOLDEN</div>
+  <div class="version">V2.6.6 </div>
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('chat')">💬 Tanya CC</div>
@@ -57,8 +57,8 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
 
 <div id="chatTab" class="chat">
   <div class="card gold">
-    <b style="color:#92400e">✨ V2.6.6 Biru Golden</b><br>
-    <span style="font-size:13px">103 Topik • GCR 180 hari SSPA 2024 • Ex Gratia • Medical Board • Kalkulator LPPSA & GCR • Theme Biru Golden</span>
+    <b style="color:#92400e">✨ V2.6.6</b><br>
+    <span style="font-size:13px">103 Topik • GCR 180 hari SSPA 2024 • Ex Gratia • Medical Board • Kalkulator LPPSA & GCR • </span>
   </div>
   <div class="quick">
     <span onclick="ask('GCR 180 hari SSPA')">🔵 GCR 180 hari</span>
@@ -71,7 +71,7 @@ body{font-family:'Plus Jakarta Sans',system-ui;background:var(--bg);color:#1e293
     <span onclick="ask('Pencen dan ganjaran')">👴 Pencen</span>
   </div>
   <div id="messages">
-    <div class="msg bot"><b>Selamat datang ke Tanya CC V2.6.6 Biru Golden!</b>
+    <div class="msg bot"><b>Selamat datang ke Tanya CC</b>
 
 Saya ada 103 topik penjawat awam:
 • <b>GCR</b> - 180 hari SSPA 2024, formula, burn, waris
@@ -106,7 +106,7 @@ Taip soalan di bawah, contoh: <i>"GCR 180 hari berapa RM?"</i> atau <i>"Medical 
   <div class="kalk-card" style="margin-top:12px">
     <h4>💰 Pencen & Ganjaran</h4>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <div><label style="font-size:12px">Tahun Khidmat</label><input id="tahunP" type="number" value="25"></div>
+      <div><label style="font-size:12px">Tahun Berkhidmat (tahun)</label><input id="tahunP" type="number" value="25"></div>
       <div><label style="font-size:12px">Gaji Akhir RM</label><input id="gajiP" type="number" value="4000"></div>
     </div>
     <button onclick="kiraPencen()">Kira Pencen</button>
@@ -225,11 +225,18 @@ function kiraLPPSA(){
 function kiraPencen(){
   var tahun = parseFloat(document.getElementById('tahunP').value)||0;
   var gaji = parseFloat(document.getElementById('gajiP').value)||0;
-  var ganjaran = tahun * gaji * 0.075;
-  var pencen = Math.min(tahun/600 * gaji, gaji*0.6);
+  var bulan = tahun * 12;
+  // Formula JPA betul:
+  // Ganjaran = (bulan x gaji akhir x 7.5%) / 12  ATAU  tahun x gaji x 7.5%
+  // Pencen = (bulan / 600) x gaji akhir, max 60% gaji akhir
+  var ganjaran = (bulan * gaji * 0.075) / 12; // sama dengan tahun * gaji * 0.075
+  var pencenKasar = (bulan / 600) * gaji;
+  var pencenMax = gaji * 0.6;
+  var pencen = Math.min(pencenKasar, pencenMax);
+  var persen = (bulan/600*100).toFixed(1);
   var res = document.getElementById('resPencen');
   res.style.display='block';
-  res.innerHTML = 'Ganjaran = RM'+ganjaran.toFixed(2).toLocaleString()+'<br>Pencen Bulanan = RM'+pencen.toFixed(2).toLocaleString()+'<br><small>'+tahun+' tahun × RM'+gaji+'</small>';
+  res.innerHTML = 'Ganjaran (sekaligus) = RM'+ganjaran.toFixed(2).toLocaleString()+'<br>Pencen Bulanan = RM'+pencen.toFixed(2).toLocaleString()+'<br><small>'+tahun+' tahun = '+bulan+' bulan<br>Formula: ('+bulan+'/600) x RM'+gaji+' = '+persen+'% gaji<br>Max 60% = RM'+pencenMax.toFixed(2)+'</small>';
 }
 function saveProfil(){
   localStorage.setItem('cc_nama', document.getElementById('nama').value);
