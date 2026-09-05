@@ -51,12 +51,6 @@ Error generating stack: `+u.message+`
 
 <script>
 // V2.5 NO HISTORY AT ALL - clear chat on load
-(function(){
-  try{
-    localStorage.removeItem('tanya_cc_feedback_answers_v1');
-    localStorage.removeItem('tanya_cc_chat_history');
-    localStorage.removeItem('tanyaCC_draft');
-  }catch(e){}
   window.addEventListener('load', ()=>{
     try{
       localStorage.removeItem('tanya_cc_feedback_answers_v1');
@@ -287,6 +281,23 @@ window.showTab = function(id){
   }
 };
 </script>
-
+   <script>
+   (function(){
+     function applyFixes(){
+       ['profileNama','profileGred','profileGaji','profileJabatan'].forEach(id=>{
+         const el=document.getElementById(id);
+         if(el){ el.readOnly=false; el.disabled=false; el.style.pointerEvents='auto'; el.style.opacity='1'; }
+       });
+       document.querySelectorAll('input[placeholder*="Tanya"], input[placeholder*="EPW"]').forEach(inp=>{
+         inp.disabled=false; inp.readOnly=false; inp.style.pointerEvents='auto';
+       });
+       document.querySelectorAll('button[aria-label="Hantar"]').forEach(btn=>{
+         btn.disabled=false; btn.style.pointerEvents='auto'; btn.style.opacity='1';
+       });
+     }
+     window.addEventListener('load', ()=>{ setTimeout(applyFixes, 800); setTimeout(applyFixes, 2500); });
+     document.addEventListener('click', ()=> setTimeout(applyFixes, 200));
+   })();
+   </script>
 </body>
 </html>
