@@ -113,5 +113,90 @@ window.addEventListener('load', ()=>{
 });
 </script>
 
+
+<script>
+// V2.3 FIX - NO HISTORY AT ALL
+(function(){
+  // 1. Delete all draft keys permanently
+  const drafts = ['tanyaCC_draft','draft','chat_draft','q_draft','last_q','medical_board_draft'];
+  drafts.forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+  
+  // 2. Override any function that restores draft
+  const clearAllInputs = ()=>{
+    const q = document.getElementById('q');
+    if(q){ q.value=''; q.placeholder='Taip soalan baru...'; }
+    drafts.forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+  };
+  
+  // Clear on every tab switch
+  const originalShowTab = window.showTab;
+  window.showTab = function(id){
+    clearAllInputs();
+    // call original
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    const tabBtn = document.getElementById('t-'+id);
+    if(tabBtn) tabBtn.classList.add('active');
+    // load news if needed
+    if(id==='berita' || id==='news' || id==='feedback' || id==='dash'){
+      if(typeof loadNewsLive==='function') setTimeout(loadNewsLive,100);
+      if(typeof loadFeedbackLive==='function') setTimeout(loadFeedbackLive,100);
+    }
+  };
+  
+  // 3. Profile editable - reload + enable edit
+  window.editProfile = function(){
+    const saved = JSON.parse(localStorage.getItem('cc_profile')||'{}');
+    const namaEl = document.getElementById('profileNama');
+    const gredEl = document.getElementById('profileGred');
+    const gajiEl = document.getElementById('profileGaji');
+    const jabEl = document.getElementById('profileJabatan');
+    if(namaEl){ namaEl.value=saved.nama||''; namaEl.readOnly=false; namaEl.disabled=false; }
+    if(gredEl){ gredEl.value=saved.gred||''; gredEl.disabled=false; }
+    if(gajiEl){ gajiEl.value=saved.gaji||''; gajiEl.readOnly=false; gajiEl.disabled=false; }
+    if(jabEl){ jabEl.value=saved.jabatan||''; jabEl.readOnly=false; jabEl.disabled=false; }
+    alert('Boleh edit sekarang bro - tukar je terus Save');
+  };
+  
+  window.clearProfile = function(){
+    if(confirm('Padam profil? Nanti kena isi balik.')){
+      localStorage.removeItem('cc_profile');
+      ['profileNama','profileGred','profileGaji','profileJabatan'].forEach(id=>{
+        const el=document.getElementById(id); if(el) el.value='';
+      });
+      alert('Profil dipadam - boleh isi baru');
+    }
+  };
+  
+  // 4. Ensure ask clears
+  const origAsk = window.ask;
+  if(window.ask){
+    window.ask = async function(){
+      const qEl = document.getElementById('q');
+      const val = qEl ? qEl.value.trim() : '';
+      if(origAsk) await origAsk();
+      setTimeout(()=>{ clearAllInputs(); }, 200);
+    };
+  }
+  
+  // 5. On load clear
+  window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+      clearAllInputs();
+      // make profile editable by default
+      ['profileNama','profileGaji','profileJabatan'].forEach(id=>{
+        const el=document.getElementById(id); if(el){ el.readOnly=false; el.disabled=false; }
+      });
+      const gredEl=document.getElementById('profileGred'); if(gredEl) gredEl.disabled=false;
+    },500);
+  });
+  
+  // 6. Also clear on visibility change (when back from other tab)
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) clearAllInputs(); });
+})();
+</script>
+
 </body>
 </html>
